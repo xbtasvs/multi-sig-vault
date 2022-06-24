@@ -198,6 +198,7 @@ pub enum ErrorCode {
 }
 
 #[account]
+#![feature(trivial_bounds)]
 pub struct Proposals {
     pub created: [bool;100],
 }
