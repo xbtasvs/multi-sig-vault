@@ -204,7 +204,7 @@ pub enum ErrorCode {
 
 #[account]
 pub struct Proposals {
-    pub created: [bool;30],
+    pub created: [bool;32],
 }
 
 #[account]
