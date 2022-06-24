@@ -5,7 +5,7 @@
 const anchor = require("@project-serum/anchor");;
 const { SystemProgram, PublicKey } = anchor.web3;
 const IDL = require('../target/idl/vault.json');
-const PROGRAM_ID = 'DbT9ETX7b3nHqtYm7GXZZ3ksaMMr33ySoVRra95HVt4W'
+const PROGRAM_ID = 'HB44eYs12BtVuAQzcfWtxYP5xwPpw46AyvibdokGcmmn'
 const dotenv = require('dotenv');
 dotenv.config();
 const init = async function (provider) {
