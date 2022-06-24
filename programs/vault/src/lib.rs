@@ -34,7 +34,7 @@ pub mod vault {
         let proposals = &mut ctx.accounts.proposals;
         let proposal = &mut ctx.accounts.proposal;
 
-        for x in proposals.created {
+        for x in &proposals.created {
             if x == id {
                 return Err(ErrorCode::AlreadyExists.into());
             }
