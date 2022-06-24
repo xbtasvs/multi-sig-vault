@@ -32,7 +32,7 @@ pub mod vault {
         let proposals = &mut ctx.accounts.proposals;
         let proposal = &mut ctx.accounts.proposal;
 
-        if (proposals.created[proposal.id] == true) {
+        if proposals.created[proposal.id] == true {
             return Err(ErrorCode::AlreadyExists.into());
         }
 
@@ -200,9 +200,8 @@ pub enum ErrorCode {
 }
 
 #[account]
-#[derive(anchor_lang::AnchorSerialize)]
 pub struct Proposals {
-    pub created: [bool;100],
+    pub created: [bool;20],
 }
 
 #[account]
