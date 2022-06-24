@@ -24,6 +24,8 @@ pub mod vault {
     }
 
     pub fn init_proposals(ctx: Context<InitProposalsContext>, _bump: u8) -> ProgramResult {
+        let proposals = &mut ctx.accounts.proposals;
+        proposlas = [false;30];
         Ok(())
     }
 
