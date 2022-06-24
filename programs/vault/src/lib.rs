@@ -216,7 +216,7 @@ pub enum ErrorCode {
 
 #[account]
 pub struct Proposals {
-    pub created: Vec<bool>,
+    pub created: Vec<u8>,
 }
 
 #[account]
