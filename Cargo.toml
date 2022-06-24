@@ -2,3 +2,4 @@
 members = [
     "programs/*"
 ]
+borsh = { version = "0.9", features = ["const-generics"] }
