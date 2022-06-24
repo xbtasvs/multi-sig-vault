@@ -137,7 +137,7 @@ pub struct InitContext<'info> {
 #[derive(Accounts)]
 #[instruction(bump: u8)]
 pub struct InitProposalsContext<'info> {
-    #[account(init, seeds = [b"proposals".as_ref()], payer = user, space = 0, bump)]
+    #[account(init, seeds = [b"proposals".as_ref()], payer = user, space = 240, bump)]
     /// CHECK:
     proposals: AccountInfo<'info, Proposals>,
     #[account(mut)]
