@@ -34,8 +34,10 @@ pub mod vault {
         let proposals = &mut ctx.accounts.proposals;
         let proposal = &mut ctx.accounts.proposal;
 
-        if proposals.created[proposal.id as usize] == true {
-            return Err(ErrorCode::AlreadyExists.into());
+        for x in proposals.created {
+            if x == id {
+                return Err(ErrorCode::AlreadyExists.into());
+            }
         }
 
         let index;
@@ -58,7 +60,7 @@ pub mod vault {
         proposal.signed = signed;
         proposal.recipient = recipient;
         proposal.amount = 0xffffffff * amount1 as u64 + amount2 as u64;
-        proposals.created[proposal.id as usize] = true;
+        proposals.created.push(id);
         Ok(())
     }
 
@@ -69,7 +71,12 @@ pub mod vault {
         if signer.key().to_bytes() != proposal.creator.to_bytes() {
             return Err(ErrorCode::NotProposalOwner.into());
         }
-        proposals.created[proposal.id as usize] = false;
+        for i in 0..proposals.created.len() {
+            if proposals.created[i] == proposal.id {
+                proposals.created[i] = proposals.created[proposals.created.len() - 1];
+                proposals.created.pop();
+            }
+        }
         proposal.close(signer.to_account_info());
         Ok(())
     }
@@ -113,7 +120,12 @@ pub mod vault {
         if approved == THRESHOLD {
             **vault_account.lamports.borrow_mut() -= proposal.amount;
             **recipient.try_borrow_mut_lamports()? += proposal.amount;
-            proposals.created[proposal.id as usize] = false;
+            for i in 0..proposals.created.len() {
+                if proposals.created[i] == proposal.id {
+                    proposals.created[i] = proposals.created[proposals.created.len() - 1];
+                    proposals.created.pop();
+                }
+            }
 
             proposal.close(signer.to_account_info());
         }
