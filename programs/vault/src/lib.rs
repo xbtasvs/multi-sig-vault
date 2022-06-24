@@ -32,7 +32,7 @@ pub mod vault {
         let proposals = &mut ctx.accounts.proposals;
         let proposal = &mut ctx.accounts.proposal;
 
-        if proposals.created[proposal.id.into()] == true {
+        if proposals.created[proposal.id] == true {
             return Err(ErrorCode::AlreadyExists.into());
         }
 
@@ -55,7 +55,7 @@ pub mod vault {
         proposal.signed = signed;
         proposal.recipient = recipient;
         proposal.amount = 0xffffffff * amount1 as u64 + amount2 as u64;
-        proposals.created[proposal.id.into()] = true;
+        proposals.created[proposal.id] = true;
         Ok(())
     }
 
@@ -66,7 +66,7 @@ pub mod vault {
         if signer.key().to_bytes() != proposal.creator.to_bytes() {
             return Err(ErrorCode::NotProposalOwner.into());
         }
-        proposals.created[proposal.id.into()] = false;
+        proposals.created[proposal.id] = false;
         proposal.close(signer.to_account_info());
         Ok(())
     }
@@ -110,7 +110,7 @@ pub mod vault {
         if approved == THRESHOLD {
             **vault_account.lamports.borrow_mut() -= proposal.amount;
             **recipient.try_borrow_mut_lamports()? += proposal.amount;
-            proposals.created[proposal.id.into()] = false;
+            proposals.created[proposal.id] = false;
 
             proposal.close(signer.to_account_info());
         }
@@ -206,7 +206,7 @@ pub struct Proposals {
 
 #[account]
 pub struct Proposal {
-    pub id: u8,
+    pub id: usize,
     pub creator: Pubkey,
     pub signed: [bool;4],
     pub recipient: Pubkey,
