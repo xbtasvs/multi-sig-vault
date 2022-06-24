@@ -3,7 +3,7 @@ import NodeWallet from '@project-serum/anchor/dist/cjs/nodewallet';
 import { Commitment, ConnectionConfig } from '@solana/web3.js';
 
 import KEY from '../devnet.json';
-import { IDL } from '../tests/vault';
+import { IDL } from '../target/types/vault';
 const { PublicKey, Keypair, Connection, SystemProgram } = anchor.web3;
 
 const DEV_CLUSTER_API = 'https://api.devnet.solana.com';
