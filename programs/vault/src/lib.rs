@@ -135,7 +135,7 @@ pub struct InitContext<'info> {
 pub struct InitProposalsContext<'info> {
     #[account(init, seeds = [b"proposals".as_ref()], payer = user, space = 0, bump)]
     /// CHECK:
-    proposals: Account<'info>,
+    proposals: Account<'info, Proposals>,
     #[account(mut)]
     user: Signer<'info>,
     system_program: Program<'info, System>,
