@@ -40,26 +40,35 @@ const UPDATE_AUTHORITY = Keypair.fromSeed(seed);
   );
   console.log('vault pda:', vaultPDA.toString());
   console.log('user:', provider.wallet.publicKey.toString());
-  let result = await program.rpc.initVault(
-    _nonce, {
-    accounts: {
-      vault: vaultPDA,
-      user: provider.wallet.publicKey, //Admin wallet
-      systemProgram: systemProgram
-    }
-  });
+  let result
+  try {
+    result = await program.rpc.initVault(
+      _nonce, {
+      accounts: {
+        vault: vaultPDA,
+        user: provider.wallet.publicKey, //Admin wallet
+        systemProgram: systemProgram
+      }
+    });
+  } catch (err) {
+    console.log('Error initing vault:', err)
+  }
   let [proposalsPDA, _nonce1] = await anchor.web3.PublicKey.findProgramAddress(
     [Buffer.from('proposals')],
     program.programId
   );
   console.log('proposals pda:', proposalsPDA.toString());
-  result = await program.rpc.initProposals(
-    _nonce1, {
-    accounts: {
-      proposals: proposalsPDA,
-      user: provider.wallet.publicKey,
-      systemProgram: systemProgram
+  try {
+    result = await program.rpc.initProposals(
+      _nonce1, {
+      accounts: {
+        proposals: proposalsPDA,
+        user: provider.wallet.publicKey,
+        systemProgram: systemProgram
+      }
     }
+    )
+  } catch (err) {
+    console.log('Error initing proposals:', err)
   }
-  )
 })()
