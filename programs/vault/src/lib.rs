@@ -1,5 +1,6 @@
 use anchor_lang::prelude::*;
 use anchor_lang::AccountsClose;
+use borsh::{BorshSerialize, BorshDeserialize};
 use crate::constants::*;
 
 declare_id!("HustpiWex1iE1ZnusaWjnHVK72wGF8TPD6Zfp9WaQ3Bp");
