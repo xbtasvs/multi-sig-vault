@@ -1,0 +1,12 @@
+[programs.devnet]
+vault = "Da37QJFR26HJgi6Fr5oWGA16taypVFxhvqXaQbcsz1Qp"
+
+[registry]
+url = "https://anchor.projectserum.com"
+
+[provider]
+cluster = "devnet"
+wallet = "~/.config/solana/devnet.json"
+
+[scripts]
+test = "mocha -t 1000000 tests/vault.js"
