@@ -3,7 +3,7 @@ import NodeWallet from '@project-serum/anchor/dist/cjs/nodewallet';
 import { Commitment, ConnectionConfig } from '@solana/web3.js';
 
 import KEY from '../devnet.json';
-import { IDL } from '../target/types/vault';
+import { IDL } from '../tests/vault';
 const { PublicKey, Keypair, Connection, SystemProgram } = anchor.web3;
 
 const DEV_CLUSTER_API = 'https://api.devnet.solana.com';
@@ -53,7 +53,7 @@ const UPDATE_AUTHORITY = Keypair.fromSeed(seed);
     program.programId
   );
   console.log('proposals pda:', proposalsPDA.toString());
-  result = await program.rpc.init_proposals(
+  result = await program.rpc.initProposals(
     _nonce1, {
     accounts: {
       proposals: proposalsPDA,
