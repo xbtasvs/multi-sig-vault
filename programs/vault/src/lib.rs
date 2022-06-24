@@ -1,6 +1,6 @@
 use anchor_lang::prelude::*;
 use anchor_lang::AccountsClose;
-use anchor_lang::{AnchorSerialize, AnchorDeserialize};
+use anchor_lang::{AnchorSerialize, AnchorDeserialize, Account};
 use borsh::{BorshSerialize, BorshDeserialize};
 use crate::constants::*;
 
@@ -27,7 +27,7 @@ pub mod vault {
         Ok(())
     }
 
-    pub fn create_proposal(ctx: Context<CreateProposal>, recipient: Pubkey, amount1: u32, amount2: u32, _bump: u8) -> ProgramResult {
+    pub fn create_proposal(ctx: Context<CreateProposal>, recipient: Pubkey, amount1: u32, amount2: u32, _bump: u8, id: u8) -> ProgramResult {
         let signer = ctx.accounts.signer.to_account_info();
         let proposals = &mut ctx.accounts.proposals;
         let proposal = &mut ctx.accounts.proposal;
@@ -52,6 +52,7 @@ pub mod vault {
         proposal.creator = signer.key();
         let mut signed = [false, false, false, false];
         signed[index] = true;
+        proposal.id = id;
         proposal.signed = signed;
         proposal.recipient = recipient;
         proposal.amount = 0xffffffff * amount1 as u64 + amount2 as u64;
@@ -141,9 +142,9 @@ pub struct InitProposalsContext<'info> {
 }
 
 #[derive(Accounts)]
-#[instruction(bump: u8)]
+#[instruction(bump: u8, id: u8)]
 pub struct CreateProposal<'info> {
-    #[account(init, seeds = [b"proposal".as_ref(), proposal.id.as_ref()], payer = signer, space = 8 + 69 + 4 + 5 + 8, bump)]
+    #[account(init, seeds = [b"proposal".as_ref(), format!("{}", id).as_ref()], payer = signer, space = 8 + 69 + 4 + 5 + 8, bump)]
     pub proposal: Account<'info, Proposal>,
     /// CHECK:
     pub vault_account: AccountInfo<'info>,
