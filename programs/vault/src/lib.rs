@@ -200,6 +200,7 @@ pub enum ErrorCode {
 }
 
 #[account]
+#[derive(anchor_lang::AnchorSerialize)]
 pub struct Proposals {
     pub created: [bool;100],
 }
