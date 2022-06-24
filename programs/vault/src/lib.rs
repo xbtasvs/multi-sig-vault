@@ -1,5 +1,6 @@
 use anchor_lang::prelude::*;
 use anchor_lang::AccountsClose;
+use anchor_lang::{AnchorSerialize, AnchorDeserialize};
 use borsh::{BorshSerialize, BorshDeserialize};
 use crate::constants::*;
 
@@ -199,7 +200,6 @@ pub enum ErrorCode {
 }
 
 #[account]
-#![feature(trivial_bounds)]
 pub struct Proposals {
     pub created: [bool;100],
 }
