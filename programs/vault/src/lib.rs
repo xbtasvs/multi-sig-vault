@@ -24,10 +24,6 @@ pub mod vault {
     }
 
     pub fn init_proposals(ctx: Context<InitProposalsContext>, _bump: u8) -> ProgramResult {
-        let proposals = &mut ctx.accounts.proposals;
-        for i in 0..30 {
-            proposals.created[i] = false;
-        }
         Ok(())
     }
 
