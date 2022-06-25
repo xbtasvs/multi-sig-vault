@@ -8,7 +8,7 @@ const { PublicKey, Keypair, Connection, SystemProgram } = anchor.web3;
 
 const DEV_CLUSTER_API = 'https://api.devnet.solana.com';
 // const MAIN_CLUSTER_API = 'https://mainnet-beta.solana.com';
-const PROGRAM_ID = '5qZq5kRd5wPGbnnQhG7hdRcygA5EQTPT6P9NyR6yfk8K';
+const PROGRAM_ID = '4zCBXCuFuP2TCAwJPXELhd54LEKa5Nnfv17CUMBX7zah';
 // const REWARD_TOKEN = 'GnBw4qZs3maF2d5ziQmGzquQFnGV33NUcEujTQ3CbzP3';
 const ADMIN_WALLETS = [
   '7EGWwj35r6sd4ERZMU2CGoTFL1ZuoUNup8DhxFyr6UPf',
