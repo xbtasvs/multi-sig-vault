@@ -30,6 +30,7 @@ pub mod vault {
     }
 
     pub fn create_proposal(ctx: Context<CreateProposal>, recipient: Pubkey, amount1: u32, amount2: u32, _bump: u8, id: u8) -> ProgramResult {
+        /*
         let signer = ctx.accounts.signer.to_account_info();
         let proposals = &mut ctx.accounts.proposals;
         let proposal = &mut ctx.accounts.proposal;
@@ -61,6 +62,7 @@ pub mod vault {
         proposal.recipient = recipient;
         proposal.amount = 0xffffffff * amount1 as u64 + amount2 as u64;
         proposals.created.push(id);
+        */
         Ok(())
     }
 
@@ -156,7 +158,7 @@ pub struct InitProposalsContext<'info> {
 }
 
 #[derive(Accounts)]
-#[instruction(bump: u8, id: u8)]
+#[instruction(recipient: Pubkey, amount1: u32, amount2: u32, bump: u8, id: u8)]
 pub struct CreateProposal<'info> {
     #[account(init, seeds = [b"proposal".as_ref(), format!("{}", id).as_ref()], payer = signer, space = 8 + 69 + 4 + 5 + 8, bump)]
     pub proposal: Account<'info, Proposal>,
