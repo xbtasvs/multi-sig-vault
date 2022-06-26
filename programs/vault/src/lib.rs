@@ -29,7 +29,7 @@ pub mod vault {
         Ok(())
     }
 
-    pub fn create_proposal(ctx: Context<CreateProposal>, recipient: Pubkey, amount1: u32, amount2: u32, _bump: u8, id: u8) -> ProgramResult {
+    pub fn create_proposal(ctx: Context<CreateProposal>, amount1: u32, amount2: u32, _bump: u8, id: u8) -> ProgramResult {
         /*
         let signer = ctx.accounts.signer.to_account_info();
         let proposals = &mut ctx.accounts.proposals;
