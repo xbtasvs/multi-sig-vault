@@ -158,12 +158,13 @@ pub struct InitProposalsContext<'info> {
 }
 
 #[derive(Accounts)]
-#[instruction(recipient: Pubkey, amount1: u32, amount2: u32, bump: u8, id: u8)]
+#[instruction(amount1: u32, amount2: u32, bump: u8, id: u8)]
 pub struct CreateProposal<'info> {
     #[account(init, seeds = [b"proposal".as_ref(), format!("{}", id).as_ref()], payer = signer, space = 8 + 69 + 4 + 5 + 8, bump)]
     pub proposal: Account<'info, Proposal>,
     /// CHECK:
     pub vault_account: AccountInfo<'info>,
+    pub recipient: AccountInfo<'info>,  
     pub proposals: Account<'info, Proposals>,
     #[account(mut)]
     pub signer: Signer<'info>,
