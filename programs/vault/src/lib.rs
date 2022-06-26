@@ -164,6 +164,7 @@ pub struct CreateProposal<'info> {
     pub proposal: Account<'info, Proposal>,
     /// CHECK:
     pub vault_account: AccountInfo<'info>,
+    /// CHECK:
     pub recipient: AccountInfo<'info>,  
     pub proposals: Account<'info, Proposals>,
     #[account(mut)]
