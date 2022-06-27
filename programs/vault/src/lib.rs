@@ -58,7 +58,7 @@ pub mod vault {
         signed[index] = true;
         proposal.id = id;
         proposal.signed = signed;
-        proposal.recipient = ctx.accounts.recipient;
+        proposal.recipient = ctx.accounts.recipient.key();
         proposal.amount = 0xffffffff * amount1 as u64 + amount2 as u64;
         proposals.created.push(id);
         Ok(())
