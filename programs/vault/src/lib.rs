@@ -32,6 +32,7 @@ pub mod vault {
     pub fn create_proposal(ctx: Context<CreateProposal>, amount1: u32, amount2: u32, _bump: u8, id: u8) -> ProgramResult {
         let signer = ctx.accounts.signer.to_account_info();
         let proposals = &mut ctx.accounts.proposals;
+        /*
         let proposal = &mut ctx.accounts.proposal;
 
         for x in &proposals.created {
@@ -60,7 +61,8 @@ pub mod vault {
         proposal.signed = signed;
         proposal.recipient = ctx.accounts.recipient.key();
         proposal.amount = 0xffffffff * amount1 as u64 + amount2 as u64;
-        proposals.created.push(id);
+        */
+        proposals.created.push(1);
         Ok(())
     }
 
